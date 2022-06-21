@@ -38,10 +38,12 @@ bytecode = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["evm"
 # Get ABI
 abi = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["abi"]
 
-# for connecting to ganache
-w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
-chain_id = 1337
-my_address = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+# for connecting to rinkeby
+w3 = Web3(
+    Web3.HTTPProvider("https://rinkeby.infura.io/v3/cf54cb1bf192447d90ad6102606b66d6")
+)
+chain_id = 4
+my_address = "0x850661ed44De4CF465692bD732C974535E9309f4"
 private_key = os.getenv("PRIVATE_KEY")
 
 
@@ -80,7 +82,7 @@ simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
 # Initial value of favourite number
 
 
-# Official State change to blockchain
+# Interact with the contract in python
 print("Updating Contract...")
 store_transaction = simple_storage.functions.store(15).buildTransaction(
     {
